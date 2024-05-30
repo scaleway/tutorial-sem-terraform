@@ -8,7 +8,7 @@ import (
 
 	_ "github.com/lib/pq"
 	"github.com/scaleway/scaleway-sdk-go/api/rdb/v1"
-	secret "github.com/scaleway/scaleway-sdk-go/api/secret/v1alpha1"
+	secret "github.com/scaleway/scaleway-sdk-go/api/secret/v1beta1"
 	"github.com/scaleway/scaleway-sdk-go/scw"
 )
 
@@ -48,8 +48,9 @@ func main() {
 	// Name of the secret
 	secretName := "database_secret"
 	// Call the GetSecretVersionByName method on the Secret SDK
-	response, err := secretApi.AccessSecretVersionByName(&secret.AccessSecretVersionByNameRequest{
+	response, err := secretApi.AccessSecretVersionByPath(&secret.AccessSecretVersionByPathRequest{
 		SecretName: secretName,
+		SecretPath: "/",
 		Revision:   "latest",
 	})
 	if err != nil {
