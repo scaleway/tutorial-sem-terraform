@@ -26,15 +26,17 @@ type Auth struct {
 func main() {
 
 	organizationID := os.Getenv("SCW_DEFAULT_ORGANIZATION_ID")
+	defaultProjectID := os.Getenv("SCW_DEFAULT_PROJECT_ID")
 	accessKey := os.Getenv("SCW_ACCESS_KEY")
 	secretKey := os.Getenv("SCW_SECRET_KEY")
 	defaultRegion := os.Getenv("SCW_DEFAULT_REGION")
-	fmt.Printf("DEFAULT REGION: %s", defaultRegion)
+	fmt.Printf("SCW_DEFAULT_REGION: %s", defaultRegion)
 	// Create a Scaleway client
 	client, err := scw.NewClient(
 		// Get your organization ID at https://console.scaleway.com/organization/settings
 		scw.WithDefaultOrganizationID(organizationID),
 		scw.WithDefaultRegion(scw.Region(defaultRegion)),
+		scw.WithDefaultProjectID(defaultProjectID),
 		// Get your credentials at https://console.scaleway.com/iam/api-keys
 		scw.WithAuth(accessKey, secretKey),
 	)
